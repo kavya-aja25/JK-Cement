@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JK Cement - Reports</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- ===== Left Sidebar ===== -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="#"><img src="images/ajalabs-white.png" alt="AJALabs"></a>
+            </div>
+            <nav class="sidebar-nav">
+               <ul id="sidebarNavList">
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                    <li class="active"><a href="junior-senior.html"><i class="fa-solid fa-wallet"></i></a></li>
+                    <li><a href="top.html"><i class="fa-solid fa-chart-simple"></i></a></li>
+                    <li><a href="piechart.html"><i class="fa-solid fa-circle-half-stroke"></i></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#"><i class="fa-solid fa-comment-dots"></i></a>
+            </div>
+        </aside>
+
+        <!-- ===== Main Content Area (LEFT/CENTER) ===== -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search" id="mainSearchInput">
+                </div>
+                <button class="notification-btn">
+                    <i class="fa-solid fa-bell"></i>
+                </button>
+            </header>
+
+            <section class="stats-overview-section">
+                <div class="stats-grid">
+                    <div class="stat-card card-empid"><span class="stat-title">#Employee ID</span><h3 class="stat-number">737</h3></div>
+                    <div class="stat-card card-reportid"><span class="stat-title">#Report ID</span><h3 class="stat-number">1707</h3></div>
+                    <div class="stat-card card-totalapp"><span class="stat-title">#Total Approved Amount</span><h3 class="stat-number">154.81 M</h3></div>
+                    <div class="stat-card card-diff"><span class="stat-title">#Exp_Diff</span><h3 class="stat-number">49.99 M</h3></div>
+                </div>
+            </section>
+            
+            <section class="promo-banner">
+                <div class="promo-text">
+                    <h2>JK Cement</h2>
+                    <p>Established in 1975, is a leading Indian manufacturer of grey and white cement with a strong global presence.</p>
+                    <a href="junior-senior.html">Junior More Claim Than Senior Employees<i class="fa-solid fa-arrow-right-long"></i></a>
+                </div>
+                <div class="promo-image">
+                      <div class="dev">
+                          <iframe src='https://my.spline.design/genkubgreetingrobot-4pf6w6qwGryER9b4sjUm0j3Q/' frameborder='0' width='100%' height='300rem'></iframe>
+                          <div class="mask"></div>
+                      </div>
+                </div>
+            </section>
+
+            <!-- Bar Charts remain in the Main Content -->
+            <section class="chart-section">
+                <div class="chart-container">
+                    <h3 class="chart-title">Expenses by Department</h3>
+                    <canvas id="horizontalBarChart"></canvas>
+                </div>
+            </section>
+
+            <section class="chart-section">
+                <div class="chart-container">
+                    <h3 class="chart-title">Sales vs. Revenue (Monthly)</h3>
+                    <canvas id="comboChart"></canvas>
+                </div>
+            </section>
+            
+            <section class="chart-section">
+                <div class="chart-container">
+                    <h3 class="chart-title">Quarterly Unit Production</h3>
+                    <canvas id="barChart"></canvas>
+                </div>
+            </section>
+        </main>
+          
+
+        <!-- ===== Right Column (ALL RIGHT-SIDE CONTENT IS NOW HERE) ===== -->
+        <aside class="right-column">
+            <!-- Original widget is last -->
+            <section class="go-pro-banner widget">
+                <div class="pro-image">
+                    <img src="images/people.png" alt="people">
+                </div>
+                <h4>Expense and Claim</h4>
+                <p>On Employees details </p>
+                <a href="top.html" class="button-class">Top Junior Employees by Excess Claimed</a>
+            </section>
+            
+            <!-- Donut chart is first in the right column -->
+            <section class="chart-section">
+                <div class="chart-container">
+                    <h3 class="chart-title">Distribution by Junior Employee Band</h3>
+                    <canvas id="juniorBandDonutChart"></canvas>
+                </div>
+            </section>
+       
+            <!-- Pie charts are second -->
+            <section class="chart-section">
+                <div class="pie-chart-grid">
+                    <div class="chart-container">
+                        <h3 class="chart-title">Payment Status Vs Exp_diff</h3>
+                        <canvas id="paymentStatusChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="chart-title">Exception Approved Vs Exp_Diff</h3>
+                        <canvas id="claimTypeChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3 class="chart-title"> Payment Type Vs Exp_Diff</h3>
+                        <canvas id="approvalRateChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+    </div>
+    
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="piechart.js"></script>
+    <script src="junior-senior.js"></script>
+
+</body>
+</html>
