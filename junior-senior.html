@@ -67,12 +67,32 @@
             </section>
 
             <!-- Bar Charts remain in the Main Content -->
+             <!-- Add filter to the chart so that they can be filtered by year 2022,2023,2024, 2025  -->
+              <div class="filter-container">
+                <label for="filter">Filter by:</label>
+                <select id="filter">
+                    <option value="all">All</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                </select>
+            </div>
+            <script>
+                const filterSelect = document.getElementById('filter');
+                filterSelect.addEventListener('change', function() {
+                    const selectedValue = this.value;
+                    console.log(selectedValue)
+                    // Add your filtering logic here based on the selected value
+                });
+            </script>
             <section class="chart-section">
                 <div class="chart-container">
                     <h3 class="chart-title">Expenses by Department</h3>
                     <canvas id="horizontalBarChart"></canvas>
                 </div>
             </section>
+            
 
             <section class="chart-section">
                 <div class="chart-container">
@@ -99,7 +119,7 @@
                 </div>
                 <h4>Expense and Claim</h4>
                 <p>On Employees details </p>
-                <a href="top.html" class="button-class">Top Junior Employees by Excess Claimed</a>
+                <a href="search.html" class="button-class">Top Junior Employees by Excess Claimed</a>
             </section>
             
             <!-- Donut chart is first in the right column -->

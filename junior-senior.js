@@ -1,5 +1,13 @@
 // Wait for the DOM to fully load before initializing charts
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded',async function () {
+
+    const res = await fetch("/emp-id.json")
+    const data = await res.json()
+    console.log(data)
+
+    const juniorSeniorData = data.filter(item => item["Person Band before PMS"] === "Junior" || item["Person Band before PMS"] === "Senior")
+    console.log(juniorSeniorData)
+
 
     // Helper function to generate random data
     const generateRandomData = (count, min, max) => {
@@ -10,54 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return data;
     };
 
-    // // ===== 1. Bar & Line Combo Chart =====
-    // const comboCtx = document.getElementById('comboChart').getContext('2d');
-    // const comboChart = new Chart(comboCtx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-    //         datasets: [
-    //             {
-    //                 type: 'line',
-    //                 label: 'Revenue (in M)',
-    //                 data: generateRandomData(7, 5, 25),
-    //                 borderColor: '#ff6384',
-    //                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
-    //                 yAxisID: 'y1',
-    //                 tension: 0.4
-    //             },
-    //             {
-    //                 type: 'bar',
-    //                 label: 'Sales (in thousands)',
-    //                 data: generateRandomData(7, 50, 200),
-    //                 backgroundColor: '#36a2eb',
-    //                 borderColor: '#36a2eb',
-    //                 yAxisID: 'y'
-    //             }
-    //         ]
-    //     },
-    //     options: {
-    //         responsive: true,
-    //         maintainAspectRatio: false,
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true,
-    //                 position: 'left',
-    //                 title: { display: true, text: 'Sales (in thousands)' }
-    //             },
-    //             y1: {
-    //                 beginAtZero: true,
-    //                 position: 'right',
-    //                 title: { display: true, text: 'Revenue (in M)' },
-    //                 grid: {
-    //                     drawOnChartArea: false // only draw grid for one axis to avoid clutter
-    //                 }
-    //             }
-    //         }
-    //     }
-    // });
-
-    // ===================================================================
 //  NEW SALES TREND CHART (replaces comboChart)
 // ===================================================================
 const salesTrendCtx = document.getElementById('comboChart').getContext('2d');

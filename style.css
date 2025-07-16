@@ -584,6 +584,11 @@ ul {
     margin-top: 1.5rem;
     align-items: start; /* Align items to the top of the grid */
 }
+/* need to get the chart-container chart fit in the section */
+.chart-container{
+    width: 100%;
+    height: 400px;
+}
 
 /* This is the NEW code to use */
 .right-column .stats-grid {
@@ -654,20 +659,20 @@ ul {
 
 /* Add spacing between each chart section */
 .chart-section {
-    margin-top: 1.5rem;
+    margin-top: 4rem;
 }
 .charts-flex-wrapper {
     display: flex;
     flex-wrap: wrap; /* Allows charts to stack vertically if space is tight */
-    gap: 1.6rem;   /* Spacing between charts */
+    gap: 1.9rem;   /* Spacing between charts */
 }
 
 /* The main container "card" for a chart */
 .chart-container {
     background-color: #fff;
-    padding: 1.5rem;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.05);
     height: 420px;
     display: flex;
     flex-direction: column;
