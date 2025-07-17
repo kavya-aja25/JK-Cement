@@ -247,5 +247,31 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         })
     })
+    // Get the button and the dropdown content
+const filterButton = document.getElementById('filter-toggle-btn');
+const filterDropdown = document.getElementById('filter-dropdown');
+
+// --- Toggles the dropdown ---
+function toggleFilterDropdown() {
+    filterDropdown.classList.toggle('show');
+}
+
+// Event listener for the filter button click
+filterButton.addEventListener('click', function(event) {
+    // This stops the click from immediately being caught by the 'window' click listener
+    event.stopPropagation(); 
+    toggleFilterDropdown();
+});
+
+// --- Closes the dropdown if the user clicks outside of it ---
+window.addEventListener('click', function(event) {
+    // Check if the dropdown is open AND if the click was outside the button/dropdown
+    if (filterDropdown.classList.contains('show')) {
+        // .closest() checks if the clicked element (event.target) is inside our .filter-container
+        if (!event.target.closest('.filter-container')) {
+            filterDropdown.classList.remove('show');
+        }
+    }
+});
 
 });

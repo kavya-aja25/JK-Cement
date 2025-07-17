@@ -837,3 +837,83 @@ ul {
 .search-table tr:hover {
     background-color: #96acb6;
 }
+
+/* --- Main Filter Container --- */
+.filter-container {
+    position: relative; /* This is essential for positioning the dropdown */
+    display: inline-block; /* Adjust as needed for your layout */
+  }
+  
+  /* --- The Filter Button (reusing the fancy style) --- */
+  .filter-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 101; /* Make sure button is above dropdown */
+  }
+  
+  .filter-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* --- The Dropdown Panel --- */
+  .filter-dropdown-content {
+    /* HIDING and ANIMATION */
+    visibility: hidden; /* Hide it completely */
+    opacity: 0;
+    transform: translateY(-10px); /* Start slightly above for slide-down effect */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  
+    /* POSITIONING */
+    position: absolute;
+    top: 100%; /* Position it right below the container */
+    left: 0;
+    margin-top: 10px; /* A little space between button and panel */
+    z-index: 100;
+  
+    /* APPEARANCE */
+    background-color: white;
+    min-width: 220px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 1px solid #eee;
+  }
+  
+  /* The class that JavaScript will add to SHOW the dropdown */
+  .filter-dropdown-content.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* --- Styling for elements INSIDE the dropdown --- */
+  .filter-dropdown-content h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .filter-dropdown-content select {
+    width: 100%; /* Make selects fill the panel width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .filter-dropdown-content select:not(:last-child) {
+    margin-bottom: 10px; /* Add space between the two select boxes */
+  }
