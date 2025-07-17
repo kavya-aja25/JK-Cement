@@ -4,11 +4,6 @@ document.addEventListener('DOMContentLoaded',async function () {
     const res = await fetch("/emp-id.json")
     const data = await res.json()
     console.log(data)
-
-    const juniorSeniorData = data.filter(item => item["Person Band before PMS"] === "Junior" || item["Person Band before PMS"] === "Senior")
-    console.log(juniorSeniorData)
-
-
     // Helper function to generate random data
     const generateRandomData = (count, min, max) => {
         const data = [];
@@ -203,4 +198,29 @@ const salesTrendChart = new Chart(salesTrendCtx, {
             }
         }
     });
+    // need on more bar graph that shows the Manage Vs Expense Type
+    const barCtx2 = document.getElementById('barChart2').getContext('2d');
+    const barChart2 = new Chart(barCtx2, {
+        type: 'bar',
+        data: {
+            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+            datasets: [{
+                label: 'Units Produced (in millions)',
+                data: generateRandomData(4, 10, 50),
+                backgroundColor: 'rgba(97, 104, 230, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    
 });
