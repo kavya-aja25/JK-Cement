@@ -138,7 +138,7 @@ const salesTrendChart = new Chart(salesTrendCtx, {
     const horizontalBarChart = new Chart(horizontalCtx, {
         type: 'bar',
         data: {
-            labels: ['Marketing', 'Sales', 'R&D', 'HR', 'Operations', 'IT'],
+            labels: ['Kamlesh', 'Pravinkumar', 'Sukhvinder', 'Agrawal Ankish', 'Ali Shafik', 'Arora Rakshit'],
             datasets: [{
                 label: 'Expenses (in thousands)',
                 data: generateRandomData(6, 100, 500),

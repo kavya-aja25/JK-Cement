@@ -304,12 +304,6 @@ ul {
     margin-bottom: 20px;
 }
 
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
 @keyframes gradientAnimation {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -476,21 +470,20 @@ ul {
     }
 }
 
-/* MODIFIED: The 3-column grid container */
+/* MODIFIED: The 4-column grid container */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Changed to 3 columns */
-    gap: 25px;
+    grid-template-columns: repeat(4, 1fr); /* Changed to 4 columns */
+    gap: 10px;
 }
 
 /* MODIFIED: Base styles for each card with animation */
 .stat-card {
     color: #fff;
     padding: 30px;
-    border-radius: 25px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     min-height: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -548,15 +541,24 @@ ul {
 }
 
 .card-empid {
-    background: linear-gradient(135deg, #f9d423, #ff6b08);
+    background: linear-gradient(135deg, #fe6405, #f7a461);
 }
+
+.card-id_man {
+    background: linear-gradient(135deg, #76d3ff, #189dd2);
+}
+
+.card-emp_man {
+    background: linear-gradient(135deg, #f6ba59, #ffb108);
+}
+
 
 
 
 /* For tablets and smaller desktops */
 @media (max-width: 0px) {
     .stats-grid {
-        grid-template-columns: repeat(3, 1fr); /* 2 columns */
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
     }
 }
 
@@ -649,8 +651,8 @@ ul {
 .bar.blue { background-color: #339FFF; }
 
 /* (The rest of your v-stat-card styles for titles/numbers can remain the same) */
-.mini-chart { height: 60px; margin-bottom: 0.75rem; }
-.bar-container { display: flex; justify-content: center; align-items: flex-end; gap: 5px; width: 100%; height: 100%; }
+.mini-chart { height: 70px; margin-bottom: 0.5rem; }
+.bar-container { display: flex; align-items: flex-end; gap: 5px; width: 100%; height: 100%; }
 .v-stat-title { color: #8A92A6; font-size: 0.9rem; margin: 0; }
 .v-stat-number { font-size: 1.5rem; font-weight: 600; color: #222; margin-top: 0.25rem; }
 
