@@ -21,8 +21,8 @@
                 <a href="#"><img src="images\ajalabs-white.png" alt="AJALabs"></a>
             </div>
             <nav class="sidebar-nav">
-               <ul id="sidebarNavList">
-                    <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                <ul>
+                    <li><a href="#"><i class="fa-solid fa-house"></i></a></li>
                     <li><a href="junior-senior.html"><i class="fa-solid fa-wallet"></i></a></li>
                     <li class="active"><a href="search.html"><i class="fa-solid fa-chart-simple"></i></a></li>
                     <li><a href="piechart.html"><i class="fa-solid fa-circle-half-stroke"></i></a></li>
@@ -31,144 +31,137 @@
             <div class="sidebar-footer">
                 <a href="#"><i class="fa-solid fa-comment-dots"></i></a>
             </div>
-        </aside>
 
-        <!-- ===== Main Content ===== -->
+            
+        </aside>
+        
+
+        <!-- Main Content -->
         <main class="main-content">
             <header class="main-header">
                 <div class="search-bar">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" placeholder="Search" id="mainSearchInput">
                 </div>
-                <div>
-                   <!-- Main container for the filter component -->
-                <div class="filter-container">
-                    
-                    <!-- This is the button the user clicks. I've used the cool gradient style from before. -->
-                    <button id="filter-toggle-btn" class="filter-btn">
-                        <i class="fa-solid fa-filter"></i>
-                    </button>
-
-                    <!-- This div is the dropdown panel. It's hidden by default. -->
-                    <div id="filter-dropdown" class="filter-dropdown-content">
-                        <h4>Filter Options</h4>
-                        <select id="cityLocation">
-                            <option value="">Select City...</option>
-                            <!-- Add city options here -->
-                        </select>
-                        <select id="countryRegion">
-                            <option value="">Select Region...</option>
-                            <!-- Add region options here -->
-                        </select>
+                <!-- This container will hold our action buttons -->
+                <div class="header-actions">
+                    <div class="filter-container">
+                        <button id="filter-toggle-btn" class="filter-btn">
+                            <i class="fa-solid fa-filter"></i>
+                        </button>
+                        <div id="filter-dropdown" class="filter-dropdown-content">
+                            <h4>Filter Options</h4>
+                            <select id="cityLocation"><option value="">Select City...</option></select>
+                            <select id="countryRegion"><option value="">Select Region...</option></select>
+                        </div>  
                     </div>
-
-</div>
-                    
-                    </div>
+                    <!-- ===== THIS IS THE NEW DOWNLOAD LINK ===== -->
+                    <a href="#" id="download-link" class="filter-btn download-btn hidden">
+                        <i class="fa-solid fa-download"></i>
+                    </a>
+                </div>
             </header>   
 
-        <table class="search-table">
-            <thead>
-                <tr>
-                    <th>Employee</th>
-                    <th>Employee ID</th>
-                    <th>Report Name</th>
-                    <th>Expense Type</th>
-                    <th>Report ID</th>
-                    <th>Approval Status</th>
-                    <th>Payment Status</th>
-                    <th>Report Date</th>
-                    <th>Transaction Date</th>
-                    <th>Total Approved Amount</th>
-                    <th>City/Location</th>
-                    <th>Payment Type</th>
-                    <th>Approved Amount</th>
-                    <th>Submit Date</th>
-                    <th>Employee Name</th>
-                    <th>Report Start Date</th>
-                    <th>Report End Date</th>
-                    <th>Currency</th>
-                    <th>Report Total</th>
-                    <th>Receipt Status</th>
-                    <th>Cash Advance Return Received</th>
-                    <th>Amount Due Employee</th>
-                    <th>Report Id</th>
-                    <th>Approved by Delegate</th>
-                    <th>Exception Approved</th>
-                    <th>Expense Report Auditing Status</th>
-                    <th>Has Cleared Exceptions</th>
-                    <th>Person Band before PMS</th>
-                    <th>Business Unit</th>
-                    <th>Location</th>
-                    <th>Gender</th>
-                    <th>Logon ID</th>
-                    <th>Email Address</th>
-                    <th>Country/Region</th>
-                    <th>Travel Rule Class</th>
-                    <th>Employee_Manager</th>
-                    <th>Employee ID_Manager</th>
-                    <th>Report Name_Manager</th>
-                    <th>Expense Type_Manager</th>
-                    <th>Report ID_Manager</th>
-                    <th>Approval Status_Manager</th>
-                    <th>Payment Status_Manager</th>
-                    <th>Report Date_Manager</th>
-                    <th>Transaction Date_Manager</th>
-                    <th>Total Approved Amount_Manager</th>
-                    <th>City/Location_Manager</th>
-                    <th>Payment Type_Manager</th>
-                    <th>Approved Amount_Manager</th>
-                    <th>Submit Date_Manager</th>
-                    <th>Report Start Date_Manager</th>
-                    <th>Report End Date_Manager</th>
-                    <th>Currency_Manager</th>
-                    <th>Report Total_Manager</th>
-                    <th>Receipt Status_Manager</th>
-                    <th>Cash Advance Return Received_Manager</th>
-                    <th>Amount Due Employee_Manager</th>
-                    <th>Report Id_Manager</th>
-                    <th>Approved by Delegate_Manager</th>
-                    <th>Exception Approved_Manager</th>
-                    <th>Expense Report Auditing Status_Manager</th>
-                    <th>Has Cleared Exceptions_Manager</th>
-                    <th>Person Band before PMS_Manager</th>
-                    <th>Business Unit_Manager</th>
-                    <th>Location_Manager</th>
-                    <th>Gender_Manager</th>
-                    <th>Logon ID_Manager</th>
-                    <th>Email Address_Manager</th>
-                    <th>Country/Region_Manager</th>
-                    <th>Default Expense Report Approver_Manager</th>
-                    <th>Default Expense Report Approver ID_Manager</th>
-                    <th>Default Cash Advance Approver_Manager</th>
-                    <th>Default Cash Advance Approver ID_Manager</th>
-                    <th>Default Authorization Request Approver_Manager</th>
-                    <th>Default Authorization Request Approver ID_Manager</th>
-                    <th>Default Travel Request Approver_Manager</th>
-                    <th>Default Travel Request Approver ID_Manager</th>
-                    <th>BI Manager_Manager</th>
-                    <th>BI Manager ID_Manager</th>
-                    <th>Travel Employee Manager_Manager</th>
-                    <th>Travel Employee Manager ID_Manager</th>
-                    <th>Travel Rule Class_Manager</th>
-                    <th>Difference</th>
-                </tr>
-            </thead>
-            <tbody id="searchTableBody">
-                
-            </tbody>
-
-        </table>
-
-        <!-- Pagination Container -->
-        <div class="pagination-container" id="pagination-container">
-            <!-- Pagination controls will be dynamically inserted here -->
-        </div>
-
+            <table class="search-table">
+                <!-- Table head and body from your code... -->
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Employee ID</th>
+                        <th>Report Name</th>
+                        <th>Expense Type</th>
+                        <th>Report ID</th>
+                        <th>Approval Status</th>
+                        <th>Payment Status</th>
+                        <th>Report Date</th>
+                        <th>Transaction Date</th>
+                        <th>Total Approved Amount</th>
+                        <th>City/Location</th>
+                        <th>Payment Type</th>
+                        <th>Approved Amount</th>
+                        <th>Submit Date</th>
+                        <th>Employee Name</th>
+                        <th>Report Start Date</th>
+                        <th>Report End Date</th>
+                        <th>Currency</th>
+                        <th>Report Total</th>
+                        <th>Receipt Status</th>
+                        <th>Cash Advance Return Received</th>
+                        <th>Amount Due Employee</th>
+                        <th>Report Id</th>
+                        <th>Approved by Delegate</th>
+                        <th>Exception Approved</th>
+                        <th>Expense Report Auditing Status</th>
+                        <th>Has Cleared Exceptions</th>
+                        <th>Person Band before PMS</th>
+                        <th>Business Unit</th>
+                        <th>Location</th>
+                        <th>Gender</th>
+                        <th>Logon ID</th>
+                        <th>Email Address</th>
+                        <th>Country/Region</th>
+                        <th>Travel Rule Class</th>
+                        <th>Employee_Manager</th>
+                        <th>Employee ID_Manager</th>
+                        <th>Report Name_Manager</th>
+                        <th>Expense Type_Manager</th>
+                        <th>Report ID_Manager</th>
+                        <th>Approval Status_Manager</th>
+                        <th>Payment Status_Manager</th>
+                        <th>Report Date_Manager</th>
+                        <th>Transaction Date_Manager</th>
+                        <th>Total Approved Amount_Manager</th>
+                        <th>City/Location_Manager</th>
+                        <th>Payment Type_Manager</th>
+                        <th>Approved Amount_Manager</th>
+                        <th>Submit Date_Manager</th>
+                        <th>Report Start Date_Manager</th>
+                        <th>Report End Date_Manager</th>
+                        <th>Currency_Manager</th>
+                        <th>Report Total_Manager</th>
+                        <th>Receipt Status_Manager</th>
+                        <th>Cash Advance Return Received_Manager</th>
+                        <th>Amount Due Employee_Manager</th>
+                        <th>Report Id_Manager</th>
+                        <th>Approved by Delegate_Manager</th>
+                        <th>Exception Approved_Manager</th>
+                        <th>Expense Report Auditing Status_Manager</th>
+                        <th>Has Cleared Exceptions_Manager</th>
+                        <th>Person Band before PMS_Manager</th>
+                        <th>Business Unit_Manager</th>
+                        <th>Location_Manager</th>
+                        <th>Gender_Manager</th>
+                        <th>Logon ID_Manager</th>
+                        <th>Email Address_Manager</th>
+                        <th>Country/Region_Manager</th>
+                        <th>Default Expense Report Approver_Manager</th>
+                        <th>Default Expense Report Approver ID_Manager</th>
+                        <th>Default Cash Advance Approver_Manager</th>
+                        <th>Default Cash Advance Approver ID_Manager</th>
+                        <th>Default Authorization Request Approver_Manager</th>
+                        <th>Default Authorization Request Approver ID_Manager</th>
+                        <th>Default Travel Request Approver_Manager</th>
+                        <th>Default Travel Request Approver ID_Manager</th>
+                        <th>BI Manager_Manager</th>
+                        <th>BI Manager ID_Manager</th>
+                        <th>Travel Employee Manager_Manager</th>
+                        <th>Travel Employee Manager ID_Manager</th>
+                        <th>Travel Rule Class_Manager</th>
+                        <th>Difference</th>
+                    </tr>
+                </thead>
+                <tbody id="searchTableBody"></tbody>
+            </table>
+             <!-- Pagination Container -->
+             <div class="pagination-container" id="pagination-container">
+                <!-- Pagination controls will be dynamically inserted here -->
+            </div>
         </main>
     </div>
-    <!-- Chart.js Library -->
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="search.js"></script>
+
 </body>
 </html>
+

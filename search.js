@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     // --- CONFIGURATION & STATE VARIABLES ---
     const rowsPerPage = 10;
     let currentPage = 1;
-    let allData = []; // This will hold the original, unmodified data from the JSON file.
-    let currentViewData = []; // This will hold the data after filtering/searching. The pagination will use this.
+    let allData = [];           // Will hold the original, unmodified data from the JSON file.
+    let currentViewData = [];   // Will hold the data after filtering/searching.
 
     // --- DOM ELEMENT REFERENCES ---
     const searchInput = document.getElementById("mainSearchInput");
@@ -12,26 +12,26 @@ document.addEventListener('DOMContentLoaded', async function () {
     const cityLocation = document.getElementById("cityLocation");
     const countryRegion = document.getElementById("countryRegion");
     const paginationContainer = document.getElementById('pagination-container');
+    const downloadLink = document.getElementById('download-link');
 
-    // --- PAGINATION FUNCTIONS (From previous answer) ---
+    // --- CORE DISPLAY & PAGINATION FUNCTIONS ---
 
     /**
      * Renders a specific page of data into the table.
-     * @param {Array} data - The dataset to display (e.g., the filtered data).
+     * @param {Array} data - The dataset to display (the filtered data).
      * @param {number} page - The page number to display.
      */
     function displayPage(data, page) {
-        searchTableBody.innerHTML = ''; // Clear existing rows
+        searchTableBody.innerHTML = '';
         page--; // Adjust for zero-based array indexing
 
         const start = rowsPerPage * page;
         const end = start + rowsPerPage;
         const paginatedItems = data.slice(start, end);
 
-        // This loop now uses your exact row structure
         for (const item of paginatedItems) {
             const row = document.createElement("tr");
-            // Your exact template literal for creating a row
+            // This is the correct row structure for your real data
             row.innerHTML = `
                 <td>${item["Employee"] || ''}</td>
                 <td>${item["Employee ID"] || ''}</td>
@@ -121,14 +121,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     /**
-     * Creates and sets up the pagination controls.
-     * @param {Array} data - The dataset to paginate.
+     * Creates and sets up the pagination controls based on the currently filtered data.
+     * @param {Array} data - The filtered dataset.
      */
     function setupPagination(data) {
         paginationContainer.innerHTML = '';
         const pageCount = Math.ceil(data.length / rowsPerPage);
 
-        // Add Previous Button
+        if (pageCount <= 1) return; // Don't show pagination if there's only one page
+
         const prevButton = document.createElement('button');
         prevButton.classList.add('pagination-btn');
         prevButton.id = 'prev-btn';
@@ -136,13 +137,13 @@ document.addEventListener('DOMContentLoaded', async function () {
         prevButton.addEventListener('click', () => {
             if (currentPage > 1) {
                 currentPage--;
+                // *** CORRECTED: Use `currentViewData` so pagination works on filtered results
                 displayPage(currentViewData, currentPage);
                 updatePaginationUI();
             }
         });
         paginationContainer.appendChild(prevButton);
 
-        // Add Page Number Links
         for (let i = 1; i <= pageCount; i++) {
             const pageLink = document.createElement('a');
             pageLink.href = '#';
@@ -151,13 +152,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             pageLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 currentPage = i;
+                // *** CORRECTED: Use `currentViewData` so pagination works on filtered results
                 displayPage(currentViewData, currentPage);
                 updatePaginationUI();
             });
             paginationContainer.appendChild(pageLink);
         }
 
-        // Add Next Button
         const nextButton = document.createElement('button');
         nextButton.classList.add('pagination-btn');
         nextButton.id = 'next-btn';
@@ -165,6 +166,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         nextButton.addEventListener('click', () => {
             if (currentPage < pageCount) {
                 currentPage++;
+                // *** CORRECTED: Use `currentViewData` so pagination works on filtered results
                 displayPage(currentViewData, currentPage);
                 updatePaginationUI();
             }
@@ -175,15 +177,16 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     /**
-     * Updates the UI of the pagination controls (disables buttons, highlights active page).
+     * Updates the UI of the pagination controls.
      */
     function updatePaginationUI() {
+        // *** CORRECTED: Calculate page count based on `currentViewData`
         const pageCount = Math.ceil(currentViewData.length / rowsPerPage);
         const prevButton = document.getElementById('prev-btn');
         const nextButton = document.getElementById('next-btn');
 
         if (prevButton) prevButton.classList.toggle('disabled', currentPage === 1);
-        if (nextButton) nextButton.classList.toggle('disabled', currentPage === pageCount || pageCount === 0);
+        if (nextButton) nextButton.classList.toggle('disabled', currentPage === pageCount);
 
         document.querySelectorAll('.page-link').forEach(link => {
             link.classList.remove('active');
@@ -193,104 +196,72 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 
-    // --- NEW: CENTRAL FUNCTION TO HANDLE ALL DATA UPDATES ---
-    /**
-     * This function is called whenever a search or filter changes.
-     * It filters the master data, updates the view, and re-renders the table and pagination.
-     */
+    // --- CENTRAL DATA UPDATE & FILTERING FUNCTION ---
     function updateTableView() {
-        const searchValue = searchInput.value.toLowerCase();
+        const searchValue = searchInput.value;
         const cityLocationValue = cityLocation.value;
         const countryRegionValue = countryRegion.value;
 
-        // Start with the original full dataset
-        let filteredData = allData;
+        // Apply filters to the master 'allData' array
+        currentViewData = allData.filter(item => 
+            (!searchValue || Object.values(item).some(val => String(val).toLowerCase().includes(searchValue.toLowerCase()))) &&
+            (!cityLocationValue || item["City/Location"] === cityLocationValue) &&
+            (!countryRegionValue || item["Country/Region"] === countryRegionValue)
+        );
 
-        // Apply search filter
-        if (searchValue) {
-            filteredData = filteredData.filter(item => 
-                // Search across all properties of an item
-                Object.values(item).some(val => 
-                    String(val).toLowerCase().includes(searchValue)
-                )
-            );
+        currentPage = 1; // Reset to page 1 on every new filter
+
+        // Update download link based on active filters
+        const isFilterOrSearchActive = searchValue || cityLocationValue || countryRegionValue;
+        if (isFilterOrSearchActive && currentViewData.length > 0) {
+            const queryParams = new URLSearchParams();
+            if (searchValue) queryParams.set('search', searchValue);
+            if (cityLocationValue) queryParams.set('city', cityLocationValue);
+            if (countryRegionValue) queryParams.set('region', countryRegionValue);
+
+            downloadLink.href = `download.html?${queryParams.toString()}`;
+            downloadLink.classList.remove('hidden');
+        } else {
+            downloadLink.classList.add('hidden');
         }
-        
-        // Apply city filter
-        if (cityLocationValue) {
-            filteredData = filteredData.filter(item => item["City/Location"] === cityLocationValue);
-        }
 
-        // Apply region filter
-        if (countryRegionValue) {
-            filteredData = filteredData.filter(item => item["Country/Region"] === countryRegionValue);
-        }
-
-        // Update the global view data and reset to page 1
-        currentViewData = filteredData;
-        currentPage = 1;
-
-        // Re-render the table and pagination with the new data
+        // Re-render the table and pagination controls
         setupPagination(currentViewData);
         displayPage(currentViewData, currentPage);
     }
 
-
-    // --- INITIALIZATION LOGIC ---
-
-    // 1. Fetch data from the source
-    try {
-        const res = await fetch("/emp-id.json");
-        allData = await res.json();
-        currentViewData = allData; // Initially, the view is the full dataset
-    } catch (error) {
-        console.error("Failed to load data:", error);
-        searchTableBody.innerHTML = `<tr><td colspan="83">Error loading data. Please try again later.</td></tr>`;
-        return; // Stop execution if data fails to load
-    }
-    
-    // 2. Populate filter dropdowns (your original logic, which is great)
-    cityLocation.innerHTML = `<option value="">City/Location</option>`;
-    countryRegion.innerHTML = `<option value="">Country/Region</option>`;
-    const cityLocationOptions = [...new Set(allData.map(item => item["City/Location"]))].sort();
-    const countryRegionOptions = [...new Set(allData.map(item => item["Country/Region"]))].sort();
-
-    cityLocationOptions.forEach(option => {
-        if (option) cityLocation.innerHTML += `<option value="${option}">${option}</option>`;
-    });
-    countryRegionOptions.forEach(option => {
-        if (option) countryRegion.innerHTML += `<option value="${option}">${option}</option>`;
-    });
-
-    // 3. Set up event listeners to use the new central update function
-    searchInput.addEventListener("input", updateTableView);
-    cityLocation.addEventListener("change", updateTableView);
-    countryRegion.addEventListener("change", updateTableView);
-
-    // 4. Perform the initial render of the table and pagination
-    setupPagination(currentViewData);
-    displayPage(currentViewData, currentPage);
-
-
-    // --- UI LOGIC for the filter dropdown (can remain as is) ---
-    const filterButton = document.getElementById('filter-toggle-btn');
-    const filterDropdown = document.getElementById('filter-dropdown');
-    
-    function toggleFilterDropdown() {
-        filterDropdown.classList.toggle('show');
-    }
-    
-    filterButton.addEventListener('click', function(event) {
-        event.stopPropagation(); 
-        toggleFilterDropdown();
-    });
-
-    window.addEventListener('click', function(event) {
-        if (filterDropdown.classList.contains('show')) {
-            if (!event.target.closest('.filter-container')) {
-                filterDropdown.classList.remove('show');
-            }
+    // --- INITIALIZATION ---
+    async function initialize() {
+        try {
+            const res = await fetch("/emp-id.json");
+            allData = await res.json();
+        } catch (error) {
+            console.error("Failed to load data:", error);
+            searchTableBody.innerHTML = `<tr><td colspan="83">Error loading data. Please try again later.</td></tr>`;
+            return;
         }
-    });
+        
+        // Populate filter dropdowns
+        const cityLocationOptions = [...new Set(allData.map(item => item["City/Location"]))].sort();
+        cityLocationOptions.forEach(option => { if (option) cityLocation.innerHTML += `<option value="${option}">${option}</option>`; });
+        const countryRegionOptions = [...new Set(allData.map(item => item["Country/Region"]))].sort();
+        countryRegionOptions.forEach(option => { if (option) countryRegion.innerHTML += `<option value="${option}">${option}</option>`; });
 
+        // Set up event listeners to trigger the central update function
+        searchInput.addEventListener("input", updateTableView);
+        cityLocation.addEventListener("change", updateTableView);
+        countryRegion.addEventListener("change", updateTableView);
+
+        // Perform the initial render
+        updateTableView();
+
+        // UI LOGIC for the filter dropdown popup
+        const filterButton = document.getElementById('filter-toggle-btn');
+        const filterDropdown = document.getElementById('filter-dropdown');
+        filterButton.addEventListener('click', function(event) { event.stopPropagation(); filterDropdown.classList.toggle('show'); });
+        window.addEventListener('click', function(event) { if (filterDropdown.classList.contains('show') && !event.target.closest('.filter-container')) { filterDropdown.classList.remove('show'); } });
+    }
+
+    // Start the application
+    initialize();
 });

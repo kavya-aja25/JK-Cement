@@ -837,6 +837,11 @@ ul {
 .search-table tr:hover {
     background-color: #96acb6;
 }
+.header-actions{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
 /* --- Main Filter Container --- */
 .filter-container {
